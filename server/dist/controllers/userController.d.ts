@@ -1,5 +1,5 @@
-export declare const getUsers: (ctx: any) => void;
-export declare const getUser: (ctx: any) => void;
-export declare const createUser: (ctx: any) => void;
-export declare const updateUser: (ctx: any) => void;
-export declare const deleteUser: (ctx: any) => void;
+export declare const getUsers: (ctx: Context) => void;
+export declare const getUser: (ctx: Context) => void;
+export declare const createUser: (ctx: Context) => Promise<void>;
+export declare const updateUser: (ctx: Context) => void;
+export declare const deleteUser: (ctx: Context) => void;

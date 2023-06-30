@@ -1,6 +1,8 @@
 import { Context } from 'koa';
+import User from '../models/user';
 
 export const getUsers = (ctx: Context) => {
+
   ctx.body = 'Get all users';
 };
 
@@ -9,8 +11,16 @@ export const getUser = (ctx: Context) => {
   ctx.body = `Get user with ID ${id}`;
 };
 
-export const createUser = (ctx: Context) => {
-  ctx.body = 'Create a new user';
+export const createUser = async (ctx: Context) => {
+  try {
+    const user = new User(ctx.request.body);
+    await user.save();
+    ctx.status = 201;
+    ctx.body = user;
+  } catch (error) {
+    ctx.status = 400;
+    ctx.body = { error: error.message };
+  }
 };
 
 export const updateUser = (ctx: Context) => {
