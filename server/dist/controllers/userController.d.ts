@@ -3,3 +3,5 @@ export declare const getUser: (ctx: Context) => void;
 export declare const createUser: (ctx: Context) => Promise<void>;
 export declare const updateUser: (ctx: Context) => void;
 export declare const deleteUser: (ctx: Context) => void;
+export declare const register: (ctx: Context) => Promise<void>;
+export declare const login: (ctx: Context) => Promise<void>;

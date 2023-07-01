@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const router_1 = __importDefault(require("@koa/router"));
 const userController_1 = require("../controllers/userController");
 const router = new router_1.default();
+router.post('/register', userController_1.register);
+router.post('/login', userController_1.login);
 router.get('/users', userController_1.getUsers);
 router.get('/users/:id', userController_1.getUser);
 router.post('/users', userController_1.createUser);

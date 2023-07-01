@@ -1,12 +1,13 @@
 import Koa from 'koa';
 import usersRouter from './routers/user';
 import postsRouter from './routers/post';
+import xingqiusRouter from './routers/xingqiu';
 import Router from '@koa/router';
 import staticServer from 'koa-static';
 import cors from 'koa-cors';
 import bodyParser from 'koa-bodyparser';
 import mongoose from 'mongoose';
-
+import auth from './middleware/auth.middleware'
 mongoose
   .connect('mongodb://127.0.0.1:27017/zhidao', {
     useNewUrlParser: true,
@@ -26,6 +27,7 @@ app.use(staticServer('public'));
 app.use(cors());
 // bodyParser 中间件
 app.use(bodyParser());
+app.use(auth);
 const port = 3000;
 const router = new Router({
   prefix: '/api/v1', // 设置公共前缀
@@ -33,6 +35,7 @@ const router = new Router({
 
 router.use(usersRouter.routes());
 router.use(postsRouter.routes());
+router.use(xingqiusRouter.routes());
 app.use(router.routes());
 
 // 错误处理中间件

@@ -6,11 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const koa_1 = __importDefault(require("koa"));
 const user_1 = __importDefault(require("./routers/user"));
 const post_1 = __importDefault(require("./routers/post"));
+const xingqiu_1 = __importDefault(require("./routers/xingqiu"));
 const router_1 = __importDefault(require("@koa/router"));
 const koa_static_1 = __importDefault(require("koa-static"));
 const koa_cors_1 = __importDefault(require("koa-cors"));
 const koa_bodyparser_1 = __importDefault(require("koa-bodyparser"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const auth_middleware_1 = __importDefault(require("./middleware/auth.middleware"));
 mongoose_1.default
     .connect('mongodb://127.0.0.1:27017/zhidao', {
     useNewUrlParser: true,
@@ -26,12 +28,14 @@ const app = new koa_1.default();
 app.use((0, koa_static_1.default)('public'));
 app.use((0, koa_cors_1.default)());
 app.use((0, koa_bodyparser_1.default)());
+app.use(auth_middleware_1.default);
 const port = 3000;
 const router = new router_1.default({
     prefix: '/api/v1',
 });
 router.use(user_1.default.routes());
 router.use(post_1.default.routes());
+router.use(xingqiu_1.default.routes());
 app.use(router.routes());
 app.use(async (ctx, next) => {
     try {

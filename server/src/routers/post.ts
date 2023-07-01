@@ -1,5 +1,7 @@
 import Router from '@koa/router';
-import { getPosts, getPost, createPost, updatePost, deletePost } from '../controllers/postController';
+import { getPosts, getPost, 
+  createPost, updatePost, 
+  deletePost } from '../controllers/postController';
 
 const router = new Router();
 
